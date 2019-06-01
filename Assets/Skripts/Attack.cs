@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractiveZone : MonoBehaviour {
-    [SerializeField] GameObject enemy;
-    [SerializeField] Transform apperance;
-    
+public class Attack : MonoBehaviour {
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            Instantiate(enemy);
+            Character character = other.transform.GetComponent<Character>();
+            character.Damage(15);
         }
-        
     }
 }
