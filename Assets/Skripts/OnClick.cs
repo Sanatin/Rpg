@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OnClick : MonoBehaviour {
-    Transform target;
+    float speed;
     Animator animator;
 	// Use this for initialization
 	void Start () {
@@ -23,12 +23,20 @@ public class OnClick : MonoBehaviour {
 
                 Vector3 distance = hit.transform.position - transform.position;
 
-                if (distance.x >= 3)
+                if (distance.magnitude < 1)
                 {
-                    animator.SetFloat("forwardSpeed", 0.7f, 1f, Time.deltaTime);
+                    speed = 0;
                 }
-                else animator.SetFloat("forwardSpeed", 1.4f, 1f, Time.deltaTime);                
+                else
+                {
+                    if (distance.magnitude >= 8)
+                    {
+                        speed = 2;
+                    }
+                    else speed = 1;
+                }
             }
         }
+            animator.SetFloat("forwardSpeed", speed);
     }
 }
